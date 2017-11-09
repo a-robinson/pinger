@@ -49,6 +49,9 @@ func doServer(port string) {
 	case "grpc":
 		doGrpcServer(port)
 
+	case "grpc-cpp":
+		panic("unsupported")
+
 	case "x":
 		doXServer(port)
 
@@ -93,7 +96,10 @@ func doClient() {
 
 	switch *typ {
 	case "grpc":
-		doGrpcClient(addr)
+		doGrpcClient(addr, false /* cpp */)
+
+	case "grpc-cpp":
+		doGrpcClient(addr, true /* cpp */)
 
 	case "x":
 		doXClient(addr)

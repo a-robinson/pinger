@@ -12,7 +12,12 @@ import (
 	"google.golang.org/grpc"
 )
 
-var streaming = flag.Bool("g", true, "use a streaming grpc RPC")
+// #cgo CXXFLAGS: -std=c++11
+// #cgo LDFLAGS: -L/usr/local/lib -lprotobuf -D_THREAD_SAFE -lgrpc++ -lgrpc -lgrpc++_reflection -ldl
+// #include "grpc.h"
+import "C"
+
+var streaming = flag.Bool("g", false, "use a streaming grpc RPC")
 
 type pinger struct {
 	payload []byte
@@ -56,7 +61,7 @@ func doGrpcServer(port string) {
 	}
 }
 
-func grpcWorker(c PingerClient) {
+func grpcWorker(c PingerClient, cppClient C.Client) {
 	payload := make([]byte, *clientPayload)
 	_, _ = rand.Read(payload)
 
@@ -71,21 +76,25 @@ func grpcWorker(c PingerClient) {
 
 	for {
 		start := time.Now()
-		var resp *PingResponse
+		var respLen int
 		if s != nil {
 			if err := s.Send(&PingRequest{Payload: payload}); err != nil {
 				log.Fatal(err)
 			}
-			var err error
-			resp, err = s.Recv()
+			resp, err := s.Recv()
 			if err != nil {
 				log.Fatal(err)
 			}
+			respLen = len(resp.Payload)
 		} else {
-			var err error
-			resp, err = c.Ping(context.TODO(), &PingRequest{Payload: payload})
-			if err != nil {
-				log.Fatal(err)
+			if c != nil {
+				resp, err := c.Ping(context.TODO(), &PingRequest{Payload: payload})
+				if err != nil {
+					log.Fatal(err)
+				}
+				respLen = len(resp.Payload)
+			} else {
+				respLen = int(C.ClientSend(cppClient))
 			}
 		}
 		elapsed := clampLatency(time.Since(start), minLatency, maxLatency)
@@ -94,27 +103,32 @@ func grpcWorker(c PingerClient) {
 			log.Fatal(err)
 		}
 		stats.ops++
-		stats.bytes += uint64(len(payload) + len(resp.Payload))
+		stats.bytes += uint64(len(payload) + respLen)
 		stats.Unlock()
 	}
 }
 
-func doGrpcClient(addr string) {
+func doGrpcClient(addr string, cpp bool) {
 	clients := make([]PingerClient, *connections)
+	cppClients := make([]C.Client, *connections)
 	for i := 0; i < len(clients); i++ {
-		conn, err := grpc.Dial(addr,
-			grpc.WithInsecure(),
-			grpc.WithBlock(),
-			grpc.WithInitialWindowSize(65535),
-			grpc.WithInitialConnWindowSize(65535),
-		)
-		if err != nil {
-			log.Fatal(err)
+		if !cpp {
+			conn, err := grpc.Dial(addr,
+				grpc.WithInsecure(),
+				grpc.WithBlock(),
+				grpc.WithInitialWindowSize(65535),
+				grpc.WithInitialConnWindowSize(65535),
+			)
+			if err != nil {
+				log.Fatal(err)
+			}
+			clients[i] = NewPingerClient(conn)
+		} else {
+			cppClients[i] = C.NewClient()
 		}
-		clients[i] = NewPingerClient(conn)
 	}
 
 	for i := 0; i < *concurrency; i++ {
-		go grpcWorker(clients[i%len(clients)])
+		go grpcWorker(clients[i%len(clients)], cppClients[i%len(cppClients)])
 	}
 }
