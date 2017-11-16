@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/proto"
+	pingpb "github.com/petermattis/pinger/pingpb"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 )
@@ -56,7 +57,7 @@ func (y *yServerConn) readLoop() {
 		case *http2.MetaHeadersFrame:
 		case *http2.DataFrame:
 			go func(streamID uint32, data []byte) {
-				y.send(streamID, &PingResponse{Payload: payload})
+				y.send(streamID, &pingpb.PingResponse{Payload: payload})
 			}(frame.StreamID, frame.Data())
 		case *http2.RSTStreamFrame:
 		case *http2.SettingsFrame:
@@ -305,7 +306,7 @@ func yWorker(y *yClientConn) {
 
 	for {
 		start := time.Now()
-		resp := y.send(&PingRequest{Payload: payload})
+		resp := y.send(&pingpb.PingRequest{Payload: payload})
 		elapsed := clampLatency(time.Since(start), minLatency, maxLatency)
 		stats.Lock()
 		if err := stats.latency.Current.RecordValue(elapsed.Nanoseconds()); err != nil {

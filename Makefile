@@ -7,4 +7,4 @@ all: ping.pb.go
 
 .PHONY: ping.pb.go
 ping.pb.go:
-	$(PROTOC) --plugin=$(PROTOC_PLUGIN) --gogoroach_out=plugins=grpc,import_prefix=:. ping.proto
+	$(PROTOC) --plugin=$(PROTOC_PLUGIN) --gogoroach_out=plugins=grpc,import_prefix=:. pingpb/ping.proto

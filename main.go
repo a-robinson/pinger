@@ -49,7 +49,7 @@ func doServer(port string) {
 
 	switch *typ {
 	case "grpc":
-		pinger.DoGrpcServer(port)
+		doGrpcServer(port)
 
 	case "grpc-cpp":
 		panic("unsupported")
@@ -98,10 +98,10 @@ func doClient() {
 
 	switch *typ {
 	case "grpc":
-		pinger.DoGrpcClient(addr, false /* cpp */)
+		doGrpcClient(addr, false /* cpp */)
 
 	case "grpc-cpp":
-		pinger.DoGrpcClient(addr, true /* cpp */)
+		doGrpcClient(addr, true /* cpp */)
 
 	case "x":
 		doXClient(addr)

@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/proto"
+	pingpb "github.com/petermattis/pinger/pingpb"
 )
 
 type xServerConn struct {
@@ -42,7 +43,7 @@ func (x *xServerConn) readLoop() {
 			log.Fatal(err)
 		}
 		go func() {
-			x.send(seq, &PingResponse{Payload: payload})
+			x.send(seq, &pingpb.PingResponse{Payload: payload})
 		}()
 	}
 }
@@ -229,7 +230,7 @@ func xWorker(x *xClientConn) {
 
 	for {
 		start := time.Now()
-		resp := x.send(&PingRequest{Payload: payload})
+		resp := x.send(&pingpb.PingRequest{Payload: payload})
 		elapsed := clampLatency(time.Since(start), minLatency, maxLatency)
 		stats.Lock()
 		if err := stats.latency.Current.RecordValue(elapsed.Nanoseconds()); err != nil {

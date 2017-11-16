@@ -8,14 +8,10 @@ import (
 	"net"
 	"time"
 
+	pingpb "github.com/petermattis/pinger/pingpb"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
-
-// #cgo CXXFLAGS: -std=c++11
-// #cgo LDFLAGS: -L/usr/local/lib -lprotobuf -D_THREAD_SAFE -lgrpc++ -lgrpc -lgrpc++_reflection -ldl
-// #include "grpc.h"
-import "C"
 
 var streaming = flag.Bool("g", false, "use a streaming grpc RPC")
 
@@ -29,22 +25,22 @@ func newPinger() *pinger {
 	return &pinger{payload: payload}
 }
 
-func (p *pinger) Ping(_ context.Context, req *PingRequest) (*PingResponse, error) {
-	return &PingResponse{Payload: p.payload}, nil
+func (p *pinger) Ping(_ context.Context, req *pingpb.PingRequest) (*pingpb.PingResponse, error) {
+	return &pingpb.PingResponse{Payload: p.payload}, nil
 }
 
-func (p *pinger) PingStream(s Pinger_PingStreamServer) error {
+func (p *pinger) PingStream(s pingpb.Pinger_PingStreamServer) error {
 	for {
 		if _, err := s.Recv(); err != nil {
 			return err
 		}
-		if err := s.Send(&PingResponse{Payload: p.payload}); err != nil {
+		if err := s.Send(&pingpb.PingResponse{Payload: p.payload}); err != nil {
 			return err
 		}
 	}
 }
 
-func DoGrpcServer(port string) {
+func doGrpcServer(port string) {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -55,17 +51,17 @@ func DoGrpcServer(port string) {
 		grpc.InitialWindowSize(65535),
 		grpc.InitialConnWindowSize(65535),
 	)
-	RegisterPingerServer(s, newPinger())
+	pingpb.RegisterPingerServer(s, newPinger())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
 
-func grpcWorker(c PingerClient, cppClient C.Client) {
+func grpcWorker(c pingpb.PingerClient) {
 	payload := make([]byte, *clientPayload)
 	_, _ = rand.Read(payload)
 
-	var s Pinger_PingStreamClient
+	var s pingpb.Pinger_PingStreamClient
 	if *streaming {
 		var err error
 		s, err = c.PingStream(context.TODO())
@@ -78,7 +74,7 @@ func grpcWorker(c PingerClient, cppClient C.Client) {
 		start := time.Now()
 		var respLen int
 		if s != nil {
-			if err := s.Send(&PingRequest{Payload: payload}); err != nil {
+			if err := s.Send(&pingpb.PingRequest{Payload: payload}); err != nil {
 				log.Fatal(err)
 			}
 			resp, err := s.Recv()
@@ -88,13 +84,11 @@ func grpcWorker(c PingerClient, cppClient C.Client) {
 			respLen = len(resp.Payload)
 		} else {
 			if c != nil {
-				resp, err := c.Ping(context.TODO(), &PingRequest{Payload: payload})
+				resp, err := c.Ping(context.TODO(), &pingpb.PingRequest{Payload: payload})
 				if err != nil {
 					log.Fatal(err)
 				}
 				respLen = len(resp.Payload)
-			} else {
-				respLen = int(C.ClientSend(cppClient))
 			}
 		}
 		elapsed := clampLatency(time.Since(start), minLatency, maxLatency)
@@ -108,9 +102,8 @@ func grpcWorker(c PingerClient, cppClient C.Client) {
 	}
 }
 
-func DoGrpcClient(addr string, cpp bool) {
-	clients := make([]PingerClient, *connections)
-	cppClients := make([]C.Client, *connections)
+func doGrpcClient(addr string, cpp bool) {
+	clients := make([]pingpb.PingerClient, *connections)
 	for i := 0; i < len(clients); i++ {
 		if !cpp {
 			conn, err := grpc.Dial(addr,
@@ -122,13 +115,11 @@ func DoGrpcClient(addr string, cpp bool) {
 			if err != nil {
 				log.Fatal(err)
 			}
-			clients[i] = NewPingerClient(conn)
-		} else {
-			cppClients[i] = C.NewClient()
+			clients[i] = pingpb.NewPingerClient(conn)
 		}
 	}
 
 	for i := 0; i < *concurrency; i++ {
-		go grpcWorker(clients[i%len(clients)], cppClients[i%len(cppClients)])
+		go grpcWorker(clients[i%len(clients)])
 	}
 }
