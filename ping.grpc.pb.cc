@@ -13,11 +13,11 @@
 #include <grpc++/impl/codegen/rpc_service_method.h>
 #include <grpc++/impl/codegen/service_type.h>
 #include <grpc++/impl/codegen/sync_stream.h>
-namespace main {
+namespace pinger {
 
 static const char* Pinger_method_names[] = {
-  "/main.Pinger/Ping",
-  "/main.Pinger/PingStream",
+  "/pinger.Pinger/Ping",
+  "/pinger.Pinger/PingStream",
 };
 
 std::unique_ptr< Pinger::Stub> Pinger::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -30,59 +30,59 @@ Pinger::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   , rpcmethod_PingStream_(Pinger_method_names[1], ::grpc::RpcMethod::BIDI_STREAMING, channel)
   {}
 
-::grpc::Status Pinger::Stub::Ping(::grpc::ClientContext* context, const ::main::PingRequest& request, ::main::PingResponse* response) {
+::grpc::Status Pinger::Stub::Ping(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::pinger::PingResponse* response) {
   return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Ping_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::main::PingResponse>* Pinger::Stub::AsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::ClientAsyncResponseReader< ::main::PingResponse>::Create(channel_.get(), cq, rpcmethod_Ping_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>* Pinger::Stub::AsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>::Create(channel_.get(), cq, rpcmethod_Ping_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::main::PingResponse>* Pinger::Stub::PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::ClientAsyncResponseReader< ::main::PingResponse>::Create(channel_.get(), cq, rpcmethod_Ping_, context, request, false);
+::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>* Pinger::Stub::PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>::Create(channel_.get(), cq, rpcmethod_Ping_, context, request, false);
 }
 
-::grpc::ClientReaderWriter< ::main::PingRequest, ::main::PingResponse>* Pinger::Stub::PingStreamRaw(::grpc::ClientContext* context) {
-  return new ::grpc::ClientReaderWriter< ::main::PingRequest, ::main::PingResponse>(channel_.get(), rpcmethod_PingStream_, context);
+::grpc::ClientReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* Pinger::Stub::PingStreamRaw(::grpc::ClientContext* context) {
+  return new ::grpc::ClientReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>(channel_.get(), rpcmethod_PingStream_, context);
 }
 
-::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>* Pinger::Stub::AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>::Create(channel_.get(), cq, rpcmethod_PingStream_, context, true, tag);
+::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* Pinger::Stub::AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>::Create(channel_.get(), cq, rpcmethod_PingStream_, context, true, tag);
 }
 
-::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>* Pinger::Stub::PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-  return ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>::Create(channel_.get(), cq, rpcmethod_PingStream_, context, false, nullptr);
+::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* Pinger::Stub::PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>::Create(channel_.get(), cq, rpcmethod_PingStream_, context, false, nullptr);
 }
 
 Pinger::Service::Service() {
   AddMethod(new ::grpc::RpcServiceMethod(
       Pinger_method_names[0],
       ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< Pinger::Service, ::main::PingRequest, ::main::PingResponse>(
+      new ::grpc::RpcMethodHandler< Pinger::Service, ::pinger::PingRequest, ::pinger::PingResponse>(
           std::mem_fn(&Pinger::Service::Ping), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
       Pinger_method_names[1],
       ::grpc::RpcMethod::BIDI_STREAMING,
-      new ::grpc::BidiStreamingHandler< Pinger::Service, ::main::PingRequest, ::main::PingResponse>(
+      new ::grpc::BidiStreamingHandler< Pinger::Service, ::pinger::PingRequest, ::pinger::PingResponse>(
           std::mem_fn(&Pinger::Service::PingStream), this)));
 }
 
 Pinger::Service::~Service() {
 }
 
-::grpc::Status Pinger::Service::Ping(::grpc::ServerContext* context, const ::main::PingRequest* request, ::main::PingResponse* response) {
+::grpc::Status Pinger::Service::Ping(::grpc::ServerContext* context, const ::pinger::PingRequest* request, ::pinger::PingResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Pinger::Service::PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::main::PingResponse, ::main::PingRequest>* stream) {
+::grpc::Status Pinger::Service::PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::pinger::PingResponse, ::pinger::PingRequest>* stream) {
   (void) context;
   (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 
-}  // namespace main
+}  // namespace pinger
 

@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"runtime/pprof"
@@ -47,7 +49,7 @@ func doServer(port string) {
 
 	switch *typ {
 	case "grpc":
-		doGrpcServer(port)
+		pinger.DoGrpcServer(port)
 
 	case "grpc-cpp":
 		panic("unsupported")
@@ -96,10 +98,10 @@ func doClient() {
 
 	switch *typ {
 	case "grpc":
-		doGrpcClient(addr, false /* cpp */)
+		pinger.DoGrpcClient(addr, false /* cpp */)
 
 	case "grpc-cpp":
-		doGrpcClient(addr, true /* cpp */)
+		pinger.DoGrpcClient(addr, true /* cpp */)
 
 	case "x":
 		doXClient(addr)
@@ -208,10 +210,13 @@ func main() {
 	grpc.EnableTracing = false
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	flag.Parse()
+	//runtime.SetBlockProfileRate(1)
 
 	if *listen != "" {
+		go func() { log.Println(http.ListenAndServe("localhost:6061", nil)) }()
 		doServer(*listen)
 		return
 	}
+	go func() { log.Println(http.ListenAndServe("localhost:6060", nil)) }()
 	doClient()
 }

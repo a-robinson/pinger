@@ -17,7 +17,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace main {
+namespace pinger {
 
 namespace {
 
@@ -104,12 +104,12 @@ void protobuf_AddDesc_ping_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nping.proto\022\004main\"\036\n\013PingRequest\022\017\n\007pay"
-    "load\030\001 \001(\014\"\037\n\014PingResponse\022\017\n\007payload\030\001 "
-    "\001(\0142t\n\006Pinger\022/\n\004Ping\022\021.main.PingRequest"
-    "\032\022.main.PingResponse\"\000\0229\n\nPingStream\022\021.m"
-    "ain.PingRequest\032\022.main.PingResponse\"\000(\0010"
-    "\001", 201);
+    "\n\nping.proto\022\006pinger\"\036\n\013PingRequest\022\017\n\007p"
+    "ayload\030\001 \001(\014\"\037\n\014PingResponse\022\017\n\007payload\030"
+    "\001 \001(\0142|\n\006Pinger\0223\n\004Ping\022\023.pinger.PingReq"
+    "uest\032\024.pinger.PingResponse\"\000\022=\n\nPingStre"
+    "am\022\023.pinger.PingRequest\032\024.pinger.PingRes"
+    "ponse\"\000(\0010\001", 211);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ping.proto", &protobuf_RegisterTypes);
   PingRequest::default_instance_ = new PingRequest();
@@ -135,7 +135,7 @@ const int PingRequest::kPayloadFieldNumber;
 PingRequest::PingRequest()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:main.PingRequest)
+  // @@protoc_insertion_point(constructor:pinger.PingRequest)
 }
 
 void PingRequest::InitAsDefaultInstance() {
@@ -146,7 +146,7 @@ PingRequest::PingRequest(const PingRequest& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:main.PingRequest)
+  // @@protoc_insertion_point(copy_constructor:pinger.PingRequest)
 }
 
 void PingRequest::SharedCtor() {
@@ -157,7 +157,7 @@ void PingRequest::SharedCtor() {
 }
 
 PingRequest::~PingRequest() {
-  // @@protoc_insertion_point(destructor:main.PingRequest)
+  // @@protoc_insertion_point(destructor:pinger.PingRequest)
   SharedDtor();
 }
 
@@ -193,7 +193,7 @@ PingRequest* PingRequest::New(::google::protobuf::Arena* arena) const {
 }
 
 void PingRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:main.PingRequest)
+// @@protoc_insertion_point(message_clear_start:pinger.PingRequest)
   if (has_payload()) {
     payload_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
@@ -207,7 +207,7 @@ bool PingRequest::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:main.PingRequest)
+  // @@protoc_insertion_point(parse_start:pinger.PingRequest)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -239,17 +239,17 @@ bool PingRequest::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:main.PingRequest)
+  // @@protoc_insertion_point(parse_success:pinger.PingRequest)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:main.PingRequest)
+  // @@protoc_insertion_point(parse_failure:pinger.PingRequest)
   return false;
 #undef DO_
 }
 
 void PingRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:main.PingRequest)
+  // @@protoc_insertion_point(serialize_start:pinger.PingRequest)
   // optional bytes payload = 1;
   if (has_payload()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
@@ -260,12 +260,12 @@ void PingRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:main.PingRequest)
+  // @@protoc_insertion_point(serialize_end:pinger.PingRequest)
 }
 
 ::google::protobuf::uint8* PingRequest::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:main.PingRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:pinger.PingRequest)
   // optional bytes payload = 1;
   if (has_payload()) {
     target =
@@ -277,12 +277,12 @@ void PingRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:main.PingRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:pinger.PingRequest)
   return target;
 }
 
 int PingRequest::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:main.PingRequest)
+// @@protoc_insertion_point(message_byte_size_start:pinger.PingRequest)
   int total_size = 0;
 
   // optional bytes payload = 1;
@@ -304,7 +304,7 @@ int PingRequest::ByteSize() const {
 }
 
 void PingRequest::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:main.PingRequest)
+// @@protoc_insertion_point(generalized_merge_from_start:pinger.PingRequest)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -312,16 +312,16 @@ void PingRequest::MergeFrom(const ::google::protobuf::Message& from) {
       ::google::protobuf::internal::DynamicCastToGenerated<const PingRequest>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:main.PingRequest)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pinger.PingRequest)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:main.PingRequest)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pinger.PingRequest)
     MergeFrom(*source);
   }
 }
 
 void PingRequest::MergeFrom(const PingRequest& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:main.PingRequest)
+// @@protoc_insertion_point(class_specific_merge_from_start:pinger.PingRequest)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -337,14 +337,14 @@ void PingRequest::MergeFrom(const PingRequest& from) {
 }
 
 void PingRequest::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:main.PingRequest)
+// @@protoc_insertion_point(generalized_copy_from_start:pinger.PingRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void PingRequest::CopyFrom(const PingRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:main.PingRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:pinger.PingRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -392,32 +392,32 @@ void PingRequest::clear_payload() {
   clear_has_payload();
 }
  const ::std::string& PingRequest::payload() const {
-  // @@protoc_insertion_point(field_get:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_get:pinger.PingRequest.payload)
   return payload_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void PingRequest::set_payload(const ::std::string& value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set:pinger.PingRequest.payload)
 }
  void PingRequest::set_payload(const char* value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_char:pinger.PingRequest.payload)
 }
  void PingRequest::set_payload(const void* value, size_t size) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_pointer:pinger.PingRequest.payload)
 }
  ::std::string* PingRequest::mutable_payload() {
   set_has_payload();
-  // @@protoc_insertion_point(field_mutable:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_mutable:pinger.PingRequest.payload)
   return payload_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* PingRequest::release_payload() {
-  // @@protoc_insertion_point(field_release:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_release:pinger.PingRequest.payload)
   clear_has_payload();
   return payload_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -428,7 +428,7 @@ void PingRequest::clear_payload() {
     clear_has_payload();
   }
   payload_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), payload);
-  // @@protoc_insertion_point(field_set_allocated:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_allocated:pinger.PingRequest.payload)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -442,7 +442,7 @@ const int PingResponse::kPayloadFieldNumber;
 PingResponse::PingResponse()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:main.PingResponse)
+  // @@protoc_insertion_point(constructor:pinger.PingResponse)
 }
 
 void PingResponse::InitAsDefaultInstance() {
@@ -453,7 +453,7 @@ PingResponse::PingResponse(const PingResponse& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:main.PingResponse)
+  // @@protoc_insertion_point(copy_constructor:pinger.PingResponse)
 }
 
 void PingResponse::SharedCtor() {
@@ -464,7 +464,7 @@ void PingResponse::SharedCtor() {
 }
 
 PingResponse::~PingResponse() {
-  // @@protoc_insertion_point(destructor:main.PingResponse)
+  // @@protoc_insertion_point(destructor:pinger.PingResponse)
   SharedDtor();
 }
 
@@ -500,7 +500,7 @@ PingResponse* PingResponse::New(::google::protobuf::Arena* arena) const {
 }
 
 void PingResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:main.PingResponse)
+// @@protoc_insertion_point(message_clear_start:pinger.PingResponse)
   if (has_payload()) {
     payload_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
@@ -514,7 +514,7 @@ bool PingResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:main.PingResponse)
+  // @@protoc_insertion_point(parse_start:pinger.PingResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -546,17 +546,17 @@ bool PingResponse::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:main.PingResponse)
+  // @@protoc_insertion_point(parse_success:pinger.PingResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:main.PingResponse)
+  // @@protoc_insertion_point(parse_failure:pinger.PingResponse)
   return false;
 #undef DO_
 }
 
 void PingResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:main.PingResponse)
+  // @@protoc_insertion_point(serialize_start:pinger.PingResponse)
   // optional bytes payload = 1;
   if (has_payload()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
@@ -567,12 +567,12 @@ void PingResponse::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:main.PingResponse)
+  // @@protoc_insertion_point(serialize_end:pinger.PingResponse)
 }
 
 ::google::protobuf::uint8* PingResponse::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:main.PingResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:pinger.PingResponse)
   // optional bytes payload = 1;
   if (has_payload()) {
     target =
@@ -584,12 +584,12 @@ void PingResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:main.PingResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:pinger.PingResponse)
   return target;
 }
 
 int PingResponse::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:main.PingResponse)
+// @@protoc_insertion_point(message_byte_size_start:pinger.PingResponse)
   int total_size = 0;
 
   // optional bytes payload = 1;
@@ -611,7 +611,7 @@ int PingResponse::ByteSize() const {
 }
 
 void PingResponse::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:main.PingResponse)
+// @@protoc_insertion_point(generalized_merge_from_start:pinger.PingResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -619,16 +619,16 @@ void PingResponse::MergeFrom(const ::google::protobuf::Message& from) {
       ::google::protobuf::internal::DynamicCastToGenerated<const PingResponse>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:main.PingResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pinger.PingResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:main.PingResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pinger.PingResponse)
     MergeFrom(*source);
   }
 }
 
 void PingResponse::MergeFrom(const PingResponse& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:main.PingResponse)
+// @@protoc_insertion_point(class_specific_merge_from_start:pinger.PingResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -644,14 +644,14 @@ void PingResponse::MergeFrom(const PingResponse& from) {
 }
 
 void PingResponse::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:main.PingResponse)
+// @@protoc_insertion_point(generalized_copy_from_start:pinger.PingResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void PingResponse::CopyFrom(const PingResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:main.PingResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:pinger.PingResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -699,32 +699,32 @@ void PingResponse::clear_payload() {
   clear_has_payload();
 }
  const ::std::string& PingResponse::payload() const {
-  // @@protoc_insertion_point(field_get:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_get:pinger.PingResponse.payload)
   return payload_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void PingResponse::set_payload(const ::std::string& value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set:pinger.PingResponse.payload)
 }
  void PingResponse::set_payload(const char* value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_char:pinger.PingResponse.payload)
 }
  void PingResponse::set_payload(const void* value, size_t size) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_pointer:pinger.PingResponse.payload)
 }
  ::std::string* PingResponse::mutable_payload() {
   set_has_payload();
-  // @@protoc_insertion_point(field_mutable:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_mutable:pinger.PingResponse.payload)
   return payload_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* PingResponse::release_payload() {
-  // @@protoc_insertion_point(field_release:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_release:pinger.PingResponse.payload)
   clear_has_payload();
   return payload_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -735,13 +735,13 @@ void PingResponse::clear_payload() {
     clear_has_payload();
   }
   payload_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), payload);
-  // @@protoc_insertion_point(field_set_allocated:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_allocated:pinger.PingResponse.payload)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace main
+}  // namespace pinger
 
 // @@protoc_insertion_point(global_scope)

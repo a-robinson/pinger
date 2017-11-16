@@ -1,5 +1,5 @@
 syntax = "proto2";
-package main;
+package pinger;
 
 message PingRequest {
   optional bytes payload = 1;

@@ -29,7 +29,7 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace main {
+namespace pinger {
 
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_ping_2eproto();
@@ -41,7 +41,7 @@ class PingResponse;
 
 // ===================================================================
 
-class PingRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:main.PingRequest) */ {
+class PingRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pinger.PingRequest) */ {
  public:
   PingRequest();
   virtual ~PingRequest();
@@ -121,7 +121,7 @@ class PingRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_payload();
   void set_allocated_payload(::std::string* payload);
 
-  // @@protoc_insertion_point(class_scope:main.PingRequest)
+  // @@protoc_insertion_point(class_scope:pinger.PingRequest)
  private:
   inline void set_has_payload();
   inline void clear_has_payload();
@@ -139,7 +139,7 @@ class PingRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class PingResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:main.PingResponse) */ {
+class PingResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pinger.PingResponse) */ {
  public:
   PingResponse();
   virtual ~PingResponse();
@@ -219,7 +219,7 @@ class PingResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_payload();
   void set_allocated_payload(::std::string* payload);
 
-  // @@protoc_insertion_point(class_scope:main.PingResponse)
+  // @@protoc_insertion_point(class_scope:pinger.PingResponse)
  private:
   inline void set_has_payload();
   inline void clear_has_payload();
@@ -258,32 +258,32 @@ inline void PingRequest::clear_payload() {
   clear_has_payload();
 }
 inline const ::std::string& PingRequest::payload() const {
-  // @@protoc_insertion_point(field_get:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_get:pinger.PingRequest.payload)
   return payload_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void PingRequest::set_payload(const ::std::string& value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set:pinger.PingRequest.payload)
 }
 inline void PingRequest::set_payload(const char* value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_char:pinger.PingRequest.payload)
 }
 inline void PingRequest::set_payload(const void* value, size_t size) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_pointer:pinger.PingRequest.payload)
 }
 inline ::std::string* PingRequest::mutable_payload() {
   set_has_payload();
-  // @@protoc_insertion_point(field_mutable:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_mutable:pinger.PingRequest.payload)
   return payload_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* PingRequest::release_payload() {
-  // @@protoc_insertion_point(field_release:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_release:pinger.PingRequest.payload)
   clear_has_payload();
   return payload_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -294,7 +294,7 @@ inline void PingRequest::set_allocated_payload(::std::string* payload) {
     clear_has_payload();
   }
   payload_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), payload);
-  // @@protoc_insertion_point(field_set_allocated:main.PingRequest.payload)
+  // @@protoc_insertion_point(field_set_allocated:pinger.PingRequest.payload)
 }
 
 // -------------------------------------------------------------------
@@ -316,32 +316,32 @@ inline void PingResponse::clear_payload() {
   clear_has_payload();
 }
 inline const ::std::string& PingResponse::payload() const {
-  // @@protoc_insertion_point(field_get:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_get:pinger.PingResponse.payload)
   return payload_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void PingResponse::set_payload(const ::std::string& value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set:pinger.PingResponse.payload)
 }
 inline void PingResponse::set_payload(const char* value) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_char:pinger.PingResponse.payload)
 }
 inline void PingResponse::set_payload(const void* value, size_t size) {
   set_has_payload();
   payload_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_pointer:pinger.PingResponse.payload)
 }
 inline ::std::string* PingResponse::mutable_payload() {
   set_has_payload();
-  // @@protoc_insertion_point(field_mutable:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_mutable:pinger.PingResponse.payload)
   return payload_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* PingResponse::release_payload() {
-  // @@protoc_insertion_point(field_release:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_release:pinger.PingResponse.payload)
   clear_has_payload();
   return payload_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -352,7 +352,7 @@ inline void PingResponse::set_allocated_payload(::std::string* payload) {
     clear_has_payload();
   }
   payload_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), payload);
-  // @@protoc_insertion_point(field_set_allocated:main.PingResponse.payload)
+  // @@protoc_insertion_point(field_set_allocated:pinger.PingResponse.payload)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -361,7 +361,7 @@ inline void PingResponse::set_allocated_payload(::std::string* payload) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace main
+}  // namespace pinger
 
 // @@protoc_insertion_point(global_scope)
 

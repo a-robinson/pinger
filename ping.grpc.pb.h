@@ -24,66 +24,66 @@ class ServerCompletionQueue;
 class ServerContext;
 }  // namespace grpc
 
-namespace main {
+namespace pinger {
 
 class Pinger final {
  public:
   static constexpr char const* service_full_name() {
-    return "main.Pinger";
+    return "pinger.Pinger";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status Ping(::grpc::ClientContext* context, const ::main::PingRequest& request, ::main::PingResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>> AsyncPing(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>>(AsyncPingRaw(context, request, cq));
+    virtual ::grpc::Status Ping(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::pinger::PingResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>> AsyncPing(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>>(AsyncPingRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>> PrepareAsyncPing(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>>(PrepareAsyncPingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>> PrepareAsyncPing(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>>(PrepareAsyncPingRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>> PingStream(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>>(PingStreamRaw(context));
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>> PingStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>>(PingStreamRaw(context));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>> AsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>>(AsyncPingStreamRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>> AsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>>(AsyncPingStreamRaw(context, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>> PrepareAsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>>(PrepareAsyncPingStreamRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>> PrepareAsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>>(PrepareAsyncPingStreamRaw(context, cq));
     }
   private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>* AsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::main::PingResponse>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>* PingStreamRaw(::grpc::ClientContext* context) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>* AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::main::PingRequest, ::main::PingResponse>* PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>* AsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::pinger::PingResponse>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>* PingStreamRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>* AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::pinger::PingRequest, ::pinger::PingResponse>* PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status Ping(::grpc::ClientContext* context, const ::main::PingRequest& request, ::main::PingResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::main::PingResponse>> AsyncPing(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::main::PingResponse>>(AsyncPingRaw(context, request, cq));
+    ::grpc::Status Ping(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::pinger::PingResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>> AsyncPing(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>>(AsyncPingRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::main::PingResponse>> PrepareAsyncPing(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::main::PingResponse>>(PrepareAsyncPingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>> PrepareAsyncPing(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>>(PrepareAsyncPingRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriter< ::main::PingRequest, ::main::PingResponse>> PingStream(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriter< ::main::PingRequest, ::main::PingResponse>>(PingStreamRaw(context));
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>> PingStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>>(PingStreamRaw(context));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>> AsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>>(AsyncPingStreamRaw(context, cq, tag));
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>> AsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>>(AsyncPingStreamRaw(context, cq, tag));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>> PrepareAsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>>(PrepareAsyncPingStreamRaw(context, cq));
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>> PrepareAsyncPingStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>>(PrepareAsyncPingStreamRaw(context, cq));
     }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientAsyncResponseReader< ::main::PingResponse>* AsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::main::PingResponse>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::main::PingRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientReaderWriter< ::main::PingRequest, ::main::PingResponse>* PingStreamRaw(::grpc::ClientContext* context) override;
-    ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>* AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReaderWriter< ::main::PingRequest, ::main::PingResponse>* PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>* AsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::pinger::PingResponse>* PrepareAsyncPingRaw(::grpc::ClientContext* context, const ::pinger::PingRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* PingStreamRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* AsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::pinger::PingRequest, ::pinger::PingResponse>* PrepareAsyncPingStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::RpcMethod rpcmethod_Ping_;
     const ::grpc::RpcMethod rpcmethod_PingStream_;
   };
@@ -93,8 +93,8 @@ class Pinger final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status Ping(::grpc::ServerContext* context, const ::main::PingRequest* request, ::main::PingResponse* response);
-    virtual ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::main::PingResponse, ::main::PingRequest>* stream);
+    virtual ::grpc::Status Ping(::grpc::ServerContext* context, const ::pinger::PingRequest* request, ::pinger::PingResponse* response);
+    virtual ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::pinger::PingResponse, ::pinger::PingRequest>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_Ping : public BaseClass {
@@ -108,11 +108,11 @@ class Pinger final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* context, const ::main::PingRequest* request, ::main::PingResponse* response) final override {
+    ::grpc::Status Ping(::grpc::ServerContext* context, const ::pinger::PingRequest* request, ::pinger::PingResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestPing(::grpc::ServerContext* context, ::main::PingRequest* request, ::grpc::ServerAsyncResponseWriter< ::main::PingResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestPing(::grpc::ServerContext* context, ::pinger::PingRequest* request, ::grpc::ServerAsyncResponseWriter< ::pinger::PingResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -128,11 +128,11 @@ class Pinger final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::main::PingResponse, ::main::PingRequest>* stream) final override {
+    ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::pinger::PingResponse, ::pinger::PingRequest>* stream) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestPingStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::main::PingResponse, ::main::PingRequest>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestPingStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::pinger::PingResponse, ::pinger::PingRequest>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
     }
   };
@@ -149,7 +149,7 @@ class Pinger final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* context, const ::main::PingRequest* request, ::main::PingResponse* response) final override {
+    ::grpc::Status Ping(::grpc::ServerContext* context, const ::pinger::PingRequest* request, ::pinger::PingResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -166,7 +166,7 @@ class Pinger final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::main::PingResponse, ::main::PingRequest>* stream) final override {
+    ::grpc::Status PingStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::pinger::PingResponse, ::pinger::PingRequest>* stream) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -178,25 +178,25 @@ class Pinger final {
    public:
     WithStreamedUnaryMethod_Ping() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::StreamedUnaryHandler< ::main::PingRequest, ::main::PingResponse>(std::bind(&WithStreamedUnaryMethod_Ping<BaseClass>::StreamedPing, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::StreamedUnaryHandler< ::pinger::PingRequest, ::pinger::PingResponse>(std::bind(&WithStreamedUnaryMethod_Ping<BaseClass>::StreamedPing, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Ping() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Ping(::grpc::ServerContext* context, const ::main::PingRequest* request, ::main::PingResponse* response) final override {
+    ::grpc::Status Ping(::grpc::ServerContext* context, const ::pinger::PingRequest* request, ::pinger::PingResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedPing(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::main::PingRequest,::main::PingResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedPing(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::pinger::PingRequest,::pinger::PingResponse>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_Ping<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;
   typedef WithStreamedUnaryMethod_Ping<Service > StreamedService;
 };
 
-}  // namespace main
+}  // namespace pinger
 
 
 #endif  // GRPC_ping_2eproto__INCLUDED

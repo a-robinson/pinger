@@ -44,7 +44,7 @@ func (p *pinger) PingStream(s Pinger_PingStreamServer) error {
 	}
 }
 
-func doGrpcServer(port string) {
+func DoGrpcServer(port string) {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -108,7 +108,7 @@ func grpcWorker(c PingerClient, cppClient C.Client) {
 	}
 }
 
-func doGrpcClient(addr string, cpp bool) {
+func DoGrpcClient(addr string, cpp bool) {
 	clients := make([]PingerClient, *connections)
 	cppClients := make([]C.Client, *connections)
 	for i := 0; i < len(clients); i++ {
