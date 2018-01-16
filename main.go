@@ -55,6 +55,9 @@ func doServer(port string) {
 	case "rpcx":
 		doRPCXServer(port)
 
+	case "twirp":
+		doTwirpServer(port)
+
 	case "x":
 		doXServer(port)
 
@@ -106,6 +109,9 @@ func doClient() {
 
 	case "rpcx":
 		doRPCXClient(addr)
+
+	case "twirp":
+		doTwirpClient(addr)
 
 	case "x":
 		doXClient(addr)
